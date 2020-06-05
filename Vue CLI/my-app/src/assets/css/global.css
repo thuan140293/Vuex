@@ -1,0 +1,20 @@
+.container.margin-y{
+    margin-top: 30px
+}
+
+a,
+a:hover,
+a:focus{
+  text-decoration: none;
+  color: #009900;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
+    background-color: #009900;
+    border-color: #009900;
+}
+
+
