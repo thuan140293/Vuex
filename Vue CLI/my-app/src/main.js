@@ -8,10 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import store from './store/index'
 import router from "./router/routes";
 import "@/assets/css/global.css"
+import locale from 'element-ui/lib/locale/lang/en'
 
 Vue.config.productionTip = false
-
+Vue.use(ElementUI, { locale })
 Vue.use(ElementUI);
+
 
 new Vue({
   render: h => h(App),
