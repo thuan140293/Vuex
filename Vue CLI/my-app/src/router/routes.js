@@ -9,9 +9,6 @@ export default new Router({
       name: 'Home', path: '/', component: () => import('../views/homePage.vue'), display: 'Home'
     },
     {
-      name: 'Register', path: '/register', component: () => import('../views/registerPage.vue'), display: 'Register'
-    },
-    {
       name: 'Login', path: '/login', component: () => import('../views/loginPage.vue'), display: 'Login'
     },
   ]

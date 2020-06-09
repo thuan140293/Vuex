@@ -47,10 +47,7 @@
         ],
         commonRouteRight: [
           {
-            name: 'Register', path: '/register', display: 'Đăng ký',
-          },
-          {
-            name: 'Login', path: '/login', display: 'Đăng nhập',
+            name: 'Login', path: '/login', display: 'Login',
           }
         ]
       }

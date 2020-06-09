@@ -1,9 +1,9 @@
 import _ from 'lodash'
 
 const getData = (state) => {
+  var data = {};
   if (state.data) {
-    var data = _.map(state.data, (v) => {
-      // v.Content = v.Content ? commonFunc.shorten(v.Content, 40) : '';
+    data = _.map(state.data, (v) => {
       return v;
     });
     data = _.filter(data, (o) => { return !o.isDelete });

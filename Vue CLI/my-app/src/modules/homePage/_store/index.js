@@ -5,9 +5,10 @@ import mutations from '../_store/mutations';
 const state = {
   data: null,
   searchRequest: {
-    currentPage: 2,
-    pageSize: 2,
-    pageTotal: 12
+    title: '',
+    isPublish: true,
+    currentPage: 1,
+    pageSize: 10,
   },
 }
 

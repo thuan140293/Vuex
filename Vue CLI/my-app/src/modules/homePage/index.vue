@@ -1,25 +1,42 @@
 <template>
   <div>
-    <h1>Form Users</h1>
+    <h1>Form Event Admin</h1>
+    <div class="mb-4">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="small-title mb-3">Tìm kiếm</div>
+            <input class="form-control w-100" type="text" placeholder="Tìm kiếm theo tiêu đề" v-model="title" @keyup="handleSearch" />
+          </div>
+          <div class="col-md-5">
+          <div class="small-title mb-3">Trạng thái</div>
+             <el-select class="w-100" v-model="isPublish" @change="handleFilter" filterable placeholder="Chọn trạng thái">
+              <el-option :value="true" label="Đang đăng"></el-option>
+              <el-option :value="false" label="Đang ẩn"></el-option>
+            </el-select>
+          </div>
+      </div>
+    </div>
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">#</th>
-          <th scope="col">Họ tên</th>
-          <th scope="col">Email</th>
+          <th scope="col">Ảnh</th>
+          <th scope="col">Tiêu đề</th>
+          <th scope="col">Mô tả</th>
+          <th scope="col">Trạng thái</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in data" v-bind:key="index">
-          <td>{{item.id}}</td>
-          <td style="width: 80px">
-            <img class="avatar" :src="item.avatar"/>
+        <tr v-for="(item, index) in data.data" :key="index">
+          <td style="width: 120px">
+            <img class="avatar" :src="item.Avatar"/>
           </td>
           <td>
-            <a href="javscript:;">{{item.first_name}} {{ item.last_name }}</a>
+            <a href="javscript:;">{{item.Title}}</a>
           </td>
-          <td>{{item.email}}</td>
+          <td>{{item.Description}}</td>
+          <td style="width: 120px">
+            <label :for="item.IsPublish">{{ item.IsPublish ? 'Đang Đăng' : 'Đang Ẩn' }}</label>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -31,7 +48,7 @@
       :page-size="searchRequest.pageSize"
       :current-page.sync="searchRequest.currentPage"
       :page-sizes="[5, 10, 20]"
-      :total="searchRequest.pageTotal">
+      :total="data.total">
     </el-pagination>
   </div>
 </template>
@@ -45,7 +62,8 @@
     },
     data() {
       return {
-       
+        title: '',
+        isPublish: true
       }
     },
     computed: {
@@ -70,6 +88,25 @@
         _this.searchRequest.currentPage = val;
         await _this.$store.dispatch("$_homePage/getData");
       },
+      async handleSearch() {
+        var _this = this;
+        await _this.$store.dispatch("$_homePage/setTitle", _this.title);
+        await _this.$store.dispatch("$_homePage/getData");
+      },
+
+      async handleFilter() {
+        var _this = this;
+        await _this.$store.dispatch("$_homePage/setPublish", _this.isPublish);
+        await _this.$store.dispatch("$_homePage/getData");
+      },
+
+      redirectTo: function (path) {
+        if (path) {
+          this.$router.push(path)
+        } else {
+          this.$router.go(-1)
+        }
+      },
     }
   };
 </script>
@@ -77,7 +114,14 @@
 
 <style>
   .avatar{
-    width: 80px;
+    width: 120px;
     height: auto;
+  }
+  .form-control{
+    padding: 19px;
+  }
+  .small-title{
+    font-size: 12px;
+    font-weight: 600;
   }
 </style>
