@@ -10,6 +10,7 @@ import router from "./router/routes";
 import "@/assets/css/global.css"
 import locale from 'element-ui/lib/locale/lang/en'
 import axios from 'axios'
+import VueProgressBar from 'vue-progressbar'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -23,6 +24,12 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale })
 Vue.use(ElementUI);
+
+Vue.use(VueProgressBar, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '4px'
+})
 
 Vue.prototype.$http = axios
 

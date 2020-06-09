@@ -1,13 +1,12 @@
 <template>
   <div>
-    <h1>Event List Admin</h1>
     <div class="mb-4">
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-8">
           <div class="small-title mb-3">Tìm kiếm</div>
             <input class="form-control w-100" type="text" placeholder="Tìm kiếm theo tiêu đề" v-model="title" @keyup="handleSearch" />
           </div>
-          <div class="col-md-5">
+          <div class="col-md-4">
           <div class="small-title mb-3">Trạng thái</div>
              <el-select class="w-100" v-model="isPublish" @change="handleFilter" filterable placeholder="Chọn trạng thái">
               <el-option :value="true" label="Đang đăng"></el-option>
@@ -36,7 +35,7 @@
           </td>
           <td>{{item.Description}}</td>
           <td style="width: 120px">
-            <label :for="item.IsPublish">{{ item.IsPublish ? 'Đang Đăng' : 'Đang Ẩn' }}</label>
+            <label :for="item.IsPublish" :class="{'text-success': item.IsPublish, 'text-warning': !item.IsPublish}">{{ item.IsPublish ? 'Đang Đăng' : 'Đang Ẩn' }}</label>
           </td>
           <td style="width: 80px" class="text-center">
             <router-link :to="`/admin/event/${item.Id}`">
@@ -81,29 +80,40 @@
       })
     },
     async created() {
-      await this.$store.dispatch("$_eventListPage/getData")
+      var _this = this;
+      _this.$Progress.start()
+      await _this.$store.dispatch("$_eventListPage/getData")
+      _this.$Progress.finish()
     },
     methods: {
       async handleSizeChange(val) {
         var _this = this;
+        _this.$Progress.start()
         _this.searchRequest.pageSize = val;
         await _this.$store.dispatch("$_eventListPage/getData");
+        _this.$Progress.finish()
       },
       async handleCurrentChange(val) {
         var _this = this;
+         _this.$Progress.start()
         _this.searchRequest.currentPage = val;
         await _this.$store.dispatch("$_eventListPage/getData");
+        _this.$Progress.finish()
       },
       async handleSearch() {
         var _this = this;
+        _this.$Progress.start()
         await _this.$store.dispatch("$_eventListPage/setTitle", _this.title);
         await _this.$store.dispatch("$_eventListPage/getData");
+        _this.$Progress.finish()
       },
 
       async handleFilter() {
         var _this = this;
+        _this.$Progress.start()
         await _this.$store.dispatch("$_eventListPage/setPublish", _this.isPublish);
         await _this.$store.dispatch("$_eventListPage/getData");
+        _this.$Progress.finish()
       },
 
       redirectTo: function (path) {

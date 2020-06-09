@@ -2,6 +2,8 @@
   <div id="app">
     <nav-menu params="route: route"></nav-menu>
     <router-view></router-view>
+    <!-- set progressbar -->
+    <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 

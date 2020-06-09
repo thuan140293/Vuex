@@ -30,7 +30,6 @@
 </template>
 
 <script>
-  import { routes } from '../router/routes'
   import vuex from '@/assets/images/vuex.png';
 
   export default {
@@ -39,7 +38,6 @@
     data() {
       return {
         vuex,
-        routes,
         commonRoute: [
           {
             name: 'homePage', path: '/', display: 'Trang chủ',
