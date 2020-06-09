@@ -3,20 +3,18 @@
     <div class="container margin-y">
       <div class="row">
         <div class="col-12">
-          <HomePage />
+          <EventAdminPage />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-  
-  import HomePage from '../modules/homePage';
+  import EventAdminPage from '../modules/eventAdminPage';
   export default {
-    name: 'homePage',
+    name: 'eventAdminPage',
     components: {
-      HomePage,
+      EventAdminPage
     },
-    
   };
 </script>

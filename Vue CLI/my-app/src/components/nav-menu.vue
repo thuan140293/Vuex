@@ -42,7 +42,7 @@
         routes,
         commonRoute: [
           {
-            name: 'Home', path: '/', display: 'Home',
+            name: 'eventListPage', path: '/', display: 'Danh Sách sự kiện',
           }
         ],
         commonRouteRight: [

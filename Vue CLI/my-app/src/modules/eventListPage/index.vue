@@ -68,36 +68,36 @@
     },
     computed: {
       ...mapState({
-        searchRequest: state => state.$_homePage.searchRequest,
+        searchRequest: state => state.$_eventListPage.searchRequest,
       }),
       ...mapGetters({
-        data: "$_homePage/getData",
+        data: "$_eventListPage/getData",
       })
     },
     async created() {
-      await this.$store.dispatch("$_homePage/getData")
+      await this.$store.dispatch("$_eventListPage/getData")
     },
     methods: {
       async handleSizeChange(val) {
         var _this = this;
         _this.searchRequest.pageSize = val;
-        await _this.$store.dispatch("$_homePage/getData");
+        await _this.$store.dispatch("$_eventListPage/getData");
       },
       async handleCurrentChange(val) {
         var _this = this;
         _this.searchRequest.currentPage = val;
-        await _this.$store.dispatch("$_homePage/getData");
+        await _this.$store.dispatch("$_eventListPage/getData");
       },
       async handleSearch() {
         var _this = this;
-        await _this.$store.dispatch("$_homePage/setTitle", _this.title);
-        await _this.$store.dispatch("$_homePage/getData");
+        await _this.$store.dispatch("$_eventListPage/setTitle", _this.title);
+        await _this.$store.dispatch("$_eventListPage/getData");
       },
 
       async handleFilter() {
         var _this = this;
-        await _this.$store.dispatch("$_homePage/setPublish", _this.isPublish);
-        await _this.$store.dispatch("$_homePage/getData");
+        await _this.$store.dispatch("$_eventListPage/setPublish", _this.isPublish);
+        await _this.$store.dispatch("$_eventListPage/getData");
       },
 
       redirectTo: function (path) {

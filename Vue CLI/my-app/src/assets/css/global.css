@@ -28,7 +28,7 @@ a:focus{
 
 .el-pagination.is-background .el-pager li:not(.disabled).active{
   background-color: #009900;
-  color: #fff;
+  color: #fff !important;
 }
 
 .el-pagination.is-background .el-pager li:not(.disabled):hover{

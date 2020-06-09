@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import homePageModule from '../modules/homePage/_store';
+import eventListPageModule from '../modules/eventListPage/_store';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    $_homePage: homePageModule,
+    $_eventListPage: eventListPageModule,
   },
 })
