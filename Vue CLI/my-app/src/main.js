@@ -11,6 +11,15 @@ import "@/assets/css/global.css"
 import locale from 'element-ui/lib/locale/lang/en'
 import axios from 'axios'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+// Add all icons to the library so you can use it in your page
+library.add(fas)
+library.add(far)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale })
 Vue.use(ElementUI);

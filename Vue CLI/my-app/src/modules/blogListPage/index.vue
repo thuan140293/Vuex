@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Event List Admin</h1>
+    <h1>Blog List Admin</h1>
     <div class="mb-4">
       <div class="row">
         <div class="col-md-7">
@@ -32,14 +32,14 @@
             <img class="avatar" :src="item.Avatar"/>
           </td>
           <td>
-            <a href="#">{{item.Title}}</a>
+              <a href="#">{{item.Title}}</a>
           </td>
           <td>{{item.Description}}</td>
           <td style="width: 120px">
             <label :for="item.IsPublish">{{ item.IsPublish ? 'Đang Đăng' : 'Đang Ẩn' }}</label>
           </td>
           <td style="width: 80px" class="text-center">
-            <router-link :to="`/admin/event/${item.Id}`">
+            <router-link :to="`/admin/blog/${item.Id}`">
               <font-awesome-icon :icon="['fas', 'edit']" />
             </router-link>
           </td>
@@ -77,33 +77,33 @@
         searchRequest: state => state.$_eventListPage.searchRequest,
       }),
       ...mapGetters({
-        data: "$_eventListPage/getData",
+        data: "$_blogListPage/getData",
       })
     },
     async created() {
-      await this.$store.dispatch("$_eventListPage/getData")
+      await this.$store.dispatch("$_blogListPage/getData")
     },
     methods: {
       async handleSizeChange(val) {
         var _this = this;
         _this.searchRequest.pageSize = val;
-        await _this.$store.dispatch("$_eventListPage/getData");
+        await _this.$store.dispatch("$_blogListPage/getData");
       },
       async handleCurrentChange(val) {
         var _this = this;
         _this.searchRequest.currentPage = val;
-        await _this.$store.dispatch("$_eventListPage/getData");
+        await _this.$store.dispatch("$_blogListPage/getData");
       },
       async handleSearch() {
         var _this = this;
-        await _this.$store.dispatch("$_eventListPage/setTitle", _this.title);
-        await _this.$store.dispatch("$_eventListPage/getData");
+        await _this.$store.dispatch("$_blogListPage/setTitle", _this.title);
+        await _this.$store.dispatch("$_blogListPage/getData");
       },
 
       async handleFilter() {
         var _this = this;
-        await _this.$store.dispatch("$_eventListPage/setPublish", _this.isPublish);
-        await _this.$store.dispatch("$_eventListPage/getData");
+        await _this.$store.dispatch("$_blogListPage/setPublish", _this.isPublish);
+        await _this.$store.dispatch("$_blogListPage/getData");
       },
 
       redirectTo: function (path) {

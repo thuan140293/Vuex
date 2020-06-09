@@ -42,7 +42,13 @@
         routes,
         commonRoute: [
           {
-            name: 'eventListPage', path: '/', display: 'Danh Sách sự kiện',
+            name: 'homePage', path: '/', display: 'Trang chủ',
+          },
+          {
+            name: 'eventListPage', path: '/event', display: 'Danh Sách sự kiện',
+          },
+          {
+            name: 'blogListPage', path: '/blog', display: 'Danh Sách bài viết',
           }
         ],
         commonRouteRight: [
