@@ -82,38 +82,63 @@
     async created() {
       var _this = this;
       _this.$Progress.start()
-      await this.$store.dispatch("$_blogListPage/getData")
-      _this.$Progress.finish()
+      try {
+        await _this.$store.dispatch("$_blogListPage/getData")
+        _this.$Progress.finish()
+      } catch(error) {
+        console.log(error); 
+        _this.$Progress.fail()
+      }
     },
     methods: {
       async handleSizeChange(val) {
         var _this = this;
         _this.$Progress.start()
-        _this.searchRequest.pageSize = val;
-        await _this.$store.dispatch("$_blogListPage/getData");
-         _this.$Progress.finish()
+        try {
+          _this.searchRequest.pageSize = val;
+          await _this.$store.dispatch("$_blogListPage/getData");
+          _this.$Progress.finish()
+        } catch(error) {
+          console.log(error); 
+          _this.$Progress.fail()
+        }
       },
       async handleCurrentChange(val) {
         var _this = this;
-        _this.$Progress.start()
-        _this.searchRequest.currentPage = val;
+         _this.$Progress.start()
+        try {
+           _this.searchRequest.currentPage = val;
         await _this.$store.dispatch("$_blogListPage/getData");
-        _this.$Progress.finish()
+          _this.$Progress.finish()
+        } catch(error) {
+          console.log(error); 
+          _this.$Progress.fail()
+        }
       },
       async handleSearch() {
         var _this = this;
         _this.$Progress.start()
-        await _this.$store.dispatch("$_blogListPage/setTitle", _this.title);
-        await _this.$store.dispatch("$_blogListPage/getData");
-        _this.$Progress.finish()
+        try {
+          await _this.$store.dispatch("$_blogListPage/setTitle", _this.title);
+          await _this.$store.dispatch("$_blogListPage/getData");
+          _this.$Progress.finish()
+        } catch(error) {
+          console.log(error); 
+          _this.$Progress.fail()
+        }
       },
 
       async handleFilter() {
         var _this = this;
         _this.$Progress.start()
-        await _this.$store.dispatch("$_blogListPage/setPublish", _this.isPublish);
-        await _this.$store.dispatch("$_blogListPage/getData");
-        _this.$Progress.finish()
+        try {
+          await _this.$store.dispatch("$_blogListPage/setPublish", _this.isPublish);
+          await _this.$store.dispatch("$_blogListPage/getData");
+          _this.$Progress.finish()
+        } catch(error) {
+          console.log(error); 
+          _this.$Progress.fail()
+        }
       },
 
       redirectTo: function (path) {
