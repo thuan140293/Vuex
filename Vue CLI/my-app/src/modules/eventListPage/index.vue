@@ -8,7 +8,7 @@
           </div>
           <div class="col-md-4">
           <div class="small-title mb-3">Trạng thái</div>
-             <el-select class="w-100" v-model="isPublish" @change="handleFilter" filterable placeholder="Chọn trạng thái">
+             <el-select class="w-100" v-model="isPublish" @change="handleFilter" clearable placeholder="Chọn trạng thái">
               <el-option :value="true" label="Đang đăng"></el-option>
               <el-option :value="false" label="Đang ẩn"></el-option>
             </el-select>
