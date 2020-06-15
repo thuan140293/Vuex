@@ -12,12 +12,13 @@
     </form>
     <div class="d-flex justify-content-end">
       <button class="btn btn-secondary mr-3" @click="redirectTo('/event')">Hủy</button>
-      <button class="btn btn-primary">Lưu</button>
+      <button class="btn btn-primary" @click="validateBeforeSubmit()">Lưu</button>
     </div>
   </div>
 </template>
 
 <script>
+  import _ from 'lodash'
   export default {
     components: {
       
@@ -33,7 +34,36 @@
     computed: {
       
     },
+    async created() {
+      var _this = this;
+      if (_this.$route.params.id) {
+        var response = await _this.$store.dispatch("$_eventAdminPage/getById", _this.$route.params.id);
+        _this.formData = _.cloneDeep(response.data);
+      }
+    },
     methods:{
+      validateBeforeSubmit: _.debounce(async function () {
+        var _this = this;
+            try {
+              let response = await _this.$store.dispatch(
+                "$_eventAdminPage/editEvent",
+                _this.formData
+              );
+              _this.$notify({
+                title: 'Chúc mừng',
+                message: 'Lưu thành công',
+                type: 'success'
+              });
+              _this.$router.push("/event");
+              console.log(response)
+            } catch (error) {
+              _this.$notify.error({
+                title: 'Thất bại',
+                message: 'Lưu thất bại'
+              });            
+            }
+      }, 500),
+
       redirectTo: function (path) {
         if (path) {
           this.$router.push(path)

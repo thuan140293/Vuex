@@ -11,7 +11,9 @@ import "@/assets/css/global.css"
 import locale from 'element-ui/lib/locale/lang/en'
 import axios from 'axios'
 import VueProgressBar from 'vue-progressbar'
+import * as VeeValidate from 'vee-validate'
 
+Vue.use(VeeValidate)
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -32,7 +34,6 @@ Vue.use(VueProgressBar, {
 })
 
 Vue.prototype.$http = axios
-
 
 new Vue({
   render: h => h(App),
