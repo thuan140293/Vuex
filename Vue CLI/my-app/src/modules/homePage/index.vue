@@ -2,12 +2,45 @@
   <div>
     <div class="form-container">
       <h1 class="text-center">Trang chủ</h1>
-      <div class="frame"><div class="text"></div></div>
+      <div class="frame d-none"><div class="text"></div></div>
+    </div>
+    <div>
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Ảnh</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Mail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in data.data" :key="index">
+            <td style="width: 120px">
+              <img class="avatar" :src="item.avatar"/>
+            </td>
+            <td>
+              <a href="#">{{item.last_name}} {{item.first_name}}</a>
+            </td>
+            <td>{{item.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <el-pagination class="float-right"
+        background
+        layout="sizes, prev, pager, next, jumper"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :page-size="searchRequest.pageSize"
+        :current-page.sync="searchRequest.currentPage"
+        :page-sizes="[5, 10, 20]"
+        :total="data.total">
+      </el-pagination>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapState, mapGetters } from "vuex";
   export default {
     components: {
       
@@ -18,8 +51,50 @@
       }
     },
     computed: {
-      
+      ...mapState({
+        searchRequest: state => state.$_homePage.searchRequest,
+      }),
+      ...mapGetters({
+        data: "$_homePage/getData",
+      })
     },
+    async created() {
+      var _this = this;
+      _this.$Progress.start()
+      try {
+        await _this.$store.dispatch("$_homePage/getData")
+        _this.$Progress.finish()
+      } catch(error) {
+        console.log(error); 
+        _this.$Progress.fail()
+      }
+    },
+    methods:{
+      async handleSizeChange(val) {
+        var _this = this;
+        _this.$Progress.start()
+        try {
+          _this.searchRequest.pageSize = val;
+          await _this.$store.dispatch("$_homePage/getData");
+          _this.$Progress.finish()
+        } catch(error) {
+          console.log(error); 
+          _this.$Progress.fail()
+        }
+      },
+      async handleCurrentChange(val) {
+        var _this = this;
+         _this.$Progress.start()
+        try {
+           _this.searchRequest.currentPage = val;
+        await _this.$store.dispatch("$_homePage/getData");
+          _this.$Progress.finish()
+        } catch(error) {
+          console.log(error); 
+          _this.$Progress.fail()
+        }
+      },
+    }
   };
 </script>
 
