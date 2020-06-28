@@ -19,9 +19,12 @@
       <ul class="navbar-nav ml-auto align-items-center justify-content-between">
         <li class="nav-item" v-for="(route, index) in commonRouteRight" :key="index">
           <router-link :to ="route.path" exact-active-class="active">
-            <a class="nav-link">
+            <a class="nav-link" v-if="!currentUser">
               {{route.display.toUpperCase()}}
             </a>
+          </router-link>
+          <router-link :to ="route.path" exact-active-class="active">
+            <a class="nav-link" v-if="route.name === 'Login' && currentUser">{{currentUser.Name}}</a>
           </router-link>
         </li>
       </ul>
@@ -31,6 +34,7 @@
 
 <script>
   import vuex from '@/assets/images/vuex.png';
+  import { mapGetters } from "vuex";
 
   export default {
     components: {},
@@ -51,12 +55,16 @@
         ],
         commonRouteRight: [
           {
-            name: 'Login', path: '/login', display: 'Login',
+            name: 'Login', path: '/login', display: 'Đăng nhập',
           }
         ]
       }
     },
-    computed: {},
+    computed: {
+      ...mapGetters({
+        currentUser: "$_logInPage/currentUser",
+      })
+    },
     created() {},
   }
 </script>

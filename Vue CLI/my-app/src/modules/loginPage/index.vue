@@ -13,12 +13,12 @@
         </div>
         <button type="submit" class="btn btn-primary" @click="login()">Đăng nhập</button>
       </form>
-      <div id="status"></div>
     </div>
   </div>
 </template>
 
 <script>
+  import _ from 'lodash'
   export default {
     components: {
       
@@ -35,7 +35,24 @@
       
     },
     methods:{
-     
+      login: _.debounce(async function () {
+        var _this = this;
+            try {
+              await _this.$store.dispatch("$_logInPage/LogIn", _this.formData);
+              _this.$notify({
+                title: 'Chúc mừng',
+                message: 'Đăng nhập thành công',
+                type: 'success'
+              });
+              _this.$router.push("/");
+            }
+            catch (error) {
+              _this.$notify.error({
+                title: 'Thất bại',
+                message: 'Đăng nhập thất bại'
+              });
+            }
+      }, 500),
     }
   };
 </script>

@@ -4,11 +4,7 @@ import mutations from '../_store/mutations';
 
 const state = {
   data: null,
-  total: null,
-  searchRequest: {
-    currentPage: 1,
-    pageSize: 2,
-  },
+  currentPage: 1,
 }
 
 export default {

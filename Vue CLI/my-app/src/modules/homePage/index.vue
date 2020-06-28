@@ -2,39 +2,36 @@
   <div>
     <div class="form-container">
       <h1 class="text-center">Trang chủ</h1>
-      <div class="frame d-none"><div class="text"></div></div>
-    </div>
-    <div>
       <table class="table table-bordered">
-        <thead class="thead-dark">
+        <thead>
           <tr>
-            <th scope="col">Ảnh</th>
-            <th scope="col">Tên</th>
-            <th scope="col">Mail</th>
+            <th>#</th>
+            <th>Information</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in data.data" :key="index">
-            <td style="width: 120px">
-              <img class="avatar" :src="item.avatar"/>
-            </td>
-            <td>
-              <a href="#">{{item.last_name}} {{item.first_name}}</a>
-            </td>
-            <td>{{item.email}}</td>
+          <tr v-for="(item, index) in data" :key="index">
+            <td>{{ item.id }}</td>
+            <td><img class="avatar mr-3" :src="item.avatar"/> {{ item.email }}</td>
+            <td>{{ item.last_name }} </td>
+            <td>{{ item.first_name }}</td>
+            <td class="text-center"><font-awesome-icon :icon="['fas', 'user-edit']" class="icon"></font-awesome-icon></td>
           </tr>
-        </tbody>
+        </tbody>    
       </table>
       <el-pagination class="float-right"
         background
-        layout="sizes, prev, pager, next, jumper"
+        layout="prev, pager, next"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :page-size="searchRequest.pageSize"
-        :current-page.sync="searchRequest.currentPage"
-        :page-sizes="[5, 10, 20]"
+        :page-size="data.perPage"
+        :current-page.sync="stateRequest.currentPage"
         :total="data.total">
       </el-pagination>
+      <!-- <div class="frame"><div class="text"></div></div> -->
     </div>
   </div>
 </template>
@@ -52,7 +49,7 @@
     },
     computed: {
       ...mapState({
-        searchRequest: state => state.$_homePage.searchRequest,
+        stateRequest: state => state.$_homePage,
       }),
       ...mapGetters({
         data: "$_homePage/getData",
@@ -70,11 +67,11 @@
       }
     },
     methods:{
-      async handleSizeChange(val) {
+       async handleSizeChange(val) {
         var _this = this;
         _this.$Progress.start()
         try {
-          _this.searchRequest.pageSize = val;
+          _this.stateRequest.pageSize = val;
           await _this.$store.dispatch("$_homePage/getData");
           _this.$Progress.finish()
         } catch(error) {
@@ -86,7 +83,7 @@
         var _this = this;
          _this.$Progress.start()
         try {
-           _this.searchRequest.currentPage = val;
+           _this.stateRequest.currentPage = val;
         await _this.$store.dispatch("$_homePage/getData");
           _this.$Progress.finish()
         } catch(error) {
@@ -100,8 +97,18 @@
 
 
 <style scoped>
+  .table td:first-child{
+    width: 20px;
+  }
+  table .avatar{
+    width: 30px;
+    border-radius: 50%;
+  }
+  table .icon{
+    cursor: pointer;
+  }
   .form-container{
-    width: 400px;
+    /* width: 400px; */
     margin: auto;
   }
   body{
