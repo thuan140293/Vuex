@@ -31,7 +31,6 @@
         layout="prev, pager, next"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :page-size="data.perPage"
         :current-page.sync="stateRequest.currentPage"
         :total="data.total">
       </el-pagination>
