@@ -5,11 +5,11 @@
       <form>
         <div class="form-group">
           <label for="name">Tên đăng nhập</label>
-          <input type="text" class="form-control" id="name" aria-describedby="name" v-model="formData.Username">
+          <input type="text" class="form-control" id="name" aria-describedby="name" v-model="formData.email">
         </div>
         <div class="form-group">
           <label for="password">Mật khẩu</label>
-          <input type="password" class="form-control" id="password" v-model="formData.Password">
+          <input type="password" class="form-control" id="password" v-model="formData.password">
         </div>
         <button type="submit" class="btn btn-primary" @click="login()">Đăng nhập</button>
       </form>
@@ -26,8 +26,8 @@
     data() {
       return {
         formData: {
-          UserName: '',
-          Password: '',
+          email: '',
+          password: '',
         },
       }
     },

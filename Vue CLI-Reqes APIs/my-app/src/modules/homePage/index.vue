@@ -18,7 +18,11 @@
             <td><img class="avatar mr-3" :src="item.avatar"/> {{ item.email }}</td>
             <td>{{ item.last_name }} </td>
             <td>{{ item.first_name }}</td>
-            <td class="text-center"><font-awesome-icon :icon="['fas', 'user-edit']" class="icon"></font-awesome-icon></td>
+            <td class="text-center">
+              <router-link :to="`/detail/${item.id}`">
+                <font-awesome-icon :icon="['fas', 'user-edit']" class="icon"></font-awesome-icon>
+              </router-link>
+            </td>
           </tr>
         </tbody>    
       </table>
@@ -31,7 +35,6 @@
         :current-page.sync="stateRequest.currentPage"
         :total="data.total">
       </el-pagination>
-      <!-- <div class="frame"><div class="text"></div></div> -->
     </div>
   </div>
 </template>

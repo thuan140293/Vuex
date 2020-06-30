@@ -23,9 +23,10 @@
               {{route.display.toUpperCase()}}
             </a>
           </router-link>
-          <router-link :to ="route.path" exact-active-class="active">
-            <a class="nav-link" v-if="route.name === 'Login' && currentUser">{{currentUser.Name}}</a>
-          </router-link>
+          <div class="d-flex">
+            <a class="nav-link mr-3" v-if="currentUser">{{currentUser}}</a>
+            <a href="javascript:;" class="nav-link" v-if="currentUser" @click="signOut(), redirectTo('/login')">ĐĂNG XUẤT</a>
+          </div>
         </li>
       </ul>
     </div>
@@ -45,12 +46,6 @@
         commonRoute: [
           {
             name: 'homePage', path: '/', display: 'Trang chủ',
-          },
-          {
-            name: 'eventListPage', path: '/event', display: 'Danh Sách sự kiện',
-          },
-          {
-            name: 'blogListPage', path: '/blog', display: 'Danh Sách bài viết',
           }
         ],
         commonRouteRight: [
@@ -66,6 +61,19 @@
       })
     },
     created() {},
+    methods:{
+      redirectTo: function (path) {
+        if (path) {
+          this.$router.push(path)
+        } else {
+          this.$router.go(-1)
+        }
+      },
+      signOut: async function () {
+        var _this = this
+        _this.$store.dispatch("$_logInPage/SignOut");
+      }
+    }
   }
 </script>
 
