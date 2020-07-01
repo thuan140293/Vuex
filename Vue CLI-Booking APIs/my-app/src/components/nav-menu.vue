@@ -23,9 +23,7 @@
               {{route.display.toUpperCase()}}
             </a>
           </router-link>
-          <router-link :to ="route.path" exact-active-class="active">
-            <a class="nav-link" v-if="route.name === 'Login' && currentUser">{{currentUser.Name}}</a>
-          </router-link>
+          <a class="nav-link" v-if="route.name === 'Login' && currentUser">{{currentUser.Name}}</a>
         </li>
       </ul>
     </div>

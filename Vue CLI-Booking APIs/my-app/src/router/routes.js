@@ -4,7 +4,7 @@ import Router from "vue-router";
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
+  // mode: "history",
   routes: [
     {
       name: 'homePage', path: '/', component: () => import('../views/homePage.vue'), display: 'Trang chủ'
