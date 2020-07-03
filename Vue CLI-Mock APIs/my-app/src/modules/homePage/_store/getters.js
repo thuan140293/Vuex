@@ -12,16 +12,6 @@ const getData = (state) => {
   return data;
 };
 
-// const getSortBy = (state) => {
-//   return state.sortBy;
-// };
-
-// const getSortDirection = (state) => {
-//   return state.sortDirection;
-// };
-
 export default {
   getData,
-  // getSortBy,
-  // getSortDirection
 };

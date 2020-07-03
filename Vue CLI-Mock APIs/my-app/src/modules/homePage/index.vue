@@ -8,9 +8,15 @@
           <tr>
             <th>#</th>
             <th>Avatar</th>
-            <th>Name</th>
+            <th>
+                <span class="mr-2">Name</span>
+                <font-awesome-icon :icon="['fas', 'sort']" class="icon" @click="handleSortName()" ></font-awesome-icon>
+            </th>
+            <th>
+              <span class="mr-2">Address</span>
+                <font-awesome-icon :icon="['fas', 'sort']" class="icon" @click="handleSortAddress()" ></font-awesome-icon>
+            </th>
             <th>Phone</th>
-            <th>Address</th>
             <th></th>
           </tr>
         </thead>
@@ -19,8 +25,8 @@
             <td>{{ item.id }}</td>
             <td><img class="avatar mr-3" :src="item.avatar"/></td>
             <td>{{ item.name }} </td>
-            <td>{{ item.phone }} </td>
             <td>{{ item.address }} </td>
+            <td>{{ item.phone }} </td>
             <td class="text-center">
               <router-link :to="`/personal/${item.id}`">
                 <font-awesome-icon :icon="['fas', 'user-edit']" class="icon"></font-awesome-icon>
@@ -82,16 +88,18 @@
         await _this.$store.dispatch("$_homePage/setSearch", _this.search);
         await _this.$store.dispatch("$_homePage/getData");
       },
-      // async handleSortBy(){
-      //   var _this = this;
-      //   await _this.$store.dispatch("$_homePage/setOrderBy", _this.sortBy);
-      //   await _this.$store.dispatch("$_homePage/getData");
-      // },
-      // async handleSortDirection(){
-      //   var _this = this;
-      //   await _this.$store.dispatch("$_homePage/setOrderDirection", _this.sortDirection);
-      //   await _this.$store.dispatch("$_homePage/getData");
-      // }
+      async handleSortName(){
+        var _this = this;
+        _this.stateRequest.sortBy = 'name';
+        _this.stateRequest.sortDirection = _this.stateRequest.sortDirection ==='asc' ? 'desc' : 'asc';
+        await _this.$store.dispatch("$_homePage/getData");
+      },
+      async handleSortAddress(){
+        var _this = this;
+        _this.stateRequest.sortBy = 'address';
+        _this.stateRequest.sortDirection = _this.stateRequest.sortDirection ==='asc' ? 'desc' : 'asc';
+        await _this.$store.dispatch("$_homePage/getData");
+      },
     }
   };
 </script>

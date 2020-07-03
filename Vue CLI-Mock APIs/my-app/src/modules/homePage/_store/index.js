@@ -8,8 +8,8 @@ const state = {
   limitPage:5,
   total: 20,
   search: "",
-  // sortBy: 'name',
-	// sortDirection: 'asc',
+  sortBy: '',
+	sortDirection: 'asc',
 }
 
 export default {
