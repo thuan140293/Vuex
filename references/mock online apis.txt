@@ -1,1 +1,6 @@
 https://reqres.in/
+
+https://www.mockapi.io/docs
+https://www.mockapi.io/projects/5efd8910dd373900160b321e
+user: 1159046@itec.hcmus.edu.vn
+password: 0908711689
