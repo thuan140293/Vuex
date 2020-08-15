@@ -31,7 +31,7 @@
         vuex,
         commonRoute: [
           {
-            name: 'homePage', path: '/', display: 'Trang chủ',
+            name: 'homePage', path: '/', display: 'Home',
           }
         ]
       }
@@ -48,10 +48,6 @@
           this.$router.go(-1)
         }
       },
-      signOut: async function () {
-        var _this = this
-        _this.$store.dispatch("$_logInPage/SignOut");
-      }
     }
   }
 </script>

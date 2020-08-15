@@ -3,5 +3,5 @@ const SET_DATA = (state, messages) => {
 };
 
 export default{
-    SET_DATA
+    SET_DATA,
 }

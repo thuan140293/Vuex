@@ -4,11 +4,8 @@ import mutations from '../_store/mutations';
 
 const state = {
   data: null,
-  pageIndex: 1,
-  limitPage:5,
-  total: 20,
   search: "",
-  sortBy: '',
+  sortBy: [],
 	sortDirection: 'asc',
 }
 

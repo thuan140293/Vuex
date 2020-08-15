@@ -5,6 +5,12 @@ const getById = async (context, request) => {
   context.commit('SET_DATA', response);
 };
 
+const getEdit = async (request) => {
+  let response = request.id && request.id != "" ? await api.editData(request) : await api.createData(request);
+  return response;
+};
+
 export default {
-  getById
+  getById,
+  getEdit
 }
