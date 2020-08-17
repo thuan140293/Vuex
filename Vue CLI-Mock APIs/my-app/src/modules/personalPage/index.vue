@@ -36,13 +36,12 @@
     },
     data() {
       return {
-        formData:
-          {
+        formData: {
             name: '',
             address: '',
             phone: '',
             country: ''
-          }
+        }
       }
     },
     computed: {
@@ -70,17 +69,17 @@
        async createData() {
         var _this = this;
         try {
-          await _this.$store.dispatch("$_personalPage/getEdit", _this.formData);
+          await _this.$store.dispatch("$_personalPage/createData", _this.formData);
           _this.$notify({
             title: 'Congratulations',
-            message: 'Edit successful',
+            message: 'Successful',
             type: 'success'
           });
            _this.$router.push("/");
         } catch (error) {
           _this.$notify.error({
             title: 'Error',
-            message: 'Edit fail'
+            message: 'Fail'
           });            
         }
       },
@@ -101,7 +100,7 @@
     cursor: pointer;
   }
   .form-container{
-    /* width: 400px; */
+    width: 400px;
     margin: auto;
   }
 </style>
