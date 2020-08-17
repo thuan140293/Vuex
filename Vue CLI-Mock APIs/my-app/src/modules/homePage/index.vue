@@ -26,7 +26,6 @@
               </th>
               <th>Phone</th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -40,9 +39,6 @@
                 <router-link :to="`/personal/${item.id}`">
                   <font-awesome-icon :icon="['fas', 'edit']" class="icon"></font-awesome-icon>
                 </router-link>
-              </td>
-              <td class="text-center">
-                <font-awesome-icon :icon="['fas', 'user']" class="icon"></font-awesome-icon>
               </td>
             </tr>
           </tbody>    
