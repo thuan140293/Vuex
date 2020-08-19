@@ -17,10 +17,15 @@ const setOrderBy = async (context, request) => {
   context.commit('SET_ORDERBY', request);
 };
 
+const deleteData = async (context, request) => {
+  let response = await api.deleteData(request);
+  context.commit('DELETE_DATA', response);
+};
 
 export default {
   getData,
   setSearch,
   setOrderDirection,
-  setOrderBy
+  setOrderBy,
+  deleteData
 }

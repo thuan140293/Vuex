@@ -1,16 +1,15 @@
 <template>
   <div>
     <div class="form-container">
-      <h1 class="text-center mr-2" ref="titleHeight" style="display: inline-block">Home</h1>
       <div class="row">
         <div class="col-md-8">
-          <button class="btn btn-primary" @click="redirectTo('/personal')">Tạo mới</button>
+          <button class="btn btn-primary" @click="redirectTo('/personal')">Create new</button>
         </div>
-        <div class="col-md-4 text-right" ref="searchHeight">
-          <input class="form-control mb-3" v-model="search" @keyup="handleSearch" placeholder="Tìm kiếm..."/>
+        <div class="col-md-4 text-right">
+          <input class="form-control mb-3" v-model="search" @keyup="handleSearch" placeholder="Search..."/>
         </div>
       </div>
-      <div class="table-responsive" :style="{height: window.height + 'px'}">
+      <div class="table-responsive">
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -30,20 +29,22 @@
           </thead>
           <tbody>
             <tr v-for="(item, index) in data" :key="index">
-              <td>{{ item.id }}</td>
+              <td>{{ item.id  }}</td>
               <!-- <td><img class="avatar mr-3" :src="item.avatar"/></td> -->
               <td>{{ item.name }} </td>
               <td>{{ item.address }} </td>
               <td>{{ item.phone }} </td>
               <td class="text-center">
-                <router-link :to="`/personal/${item.id}`">
-                  <font-awesome-icon :icon="['fas', 'edit']" class="icon"></font-awesome-icon>
-                </router-link>
+                <font-awesome-icon :icon="['fas', 'trash']" class="icon" @click="openModal(item.id)"></font-awesome-icon>
               </td>
             </tr>
           </tbody>    
         </table>
        </div>
+       <el-dialog title="Are you sure that you want to delete this item?" :visible.sync="dialog">
+        <button class="btn btn-secondary mr-2" @click="dialogTableVisible = false">Hủy</button>
+        <button class="btn btn-primary" @click="handleDelete(id)">Xác nhận</button>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -55,12 +56,8 @@
     data() {
       return {
         search:'',
-        window: {
-            width: 0,
-            height: 0
-        },
-        titleHeight: 0,
-        searchHeight: 0
+        id:'',
+        dialog: false
       }
     },
     computed: {
@@ -81,13 +78,13 @@
         console.log(error); 
         _this.$Progress.fail()
       }
-      window.addEventListener('resize', _this.handleResize);
-      _this.handleResize(); 
-      _this.titleHeight = _this.$refs.titleHeight.clientHeight;
-      _this.searchHeight = _this.$refs.searchHeight.clientHeight;
-      _this.window.height = window.innerHeight - (_this.titleHeight + _this.searchHeight + 152);
     },
     methods:{
+      openModal: function(id){
+        var _this = this;
+        _this.dialog = true;
+        _this.id = id;
+      },
       redirectTo: function (path) {
         if (path) {
           this.$router.push(path)
@@ -97,18 +94,38 @@
       },
       async handleSearch(){
         var _this = this;
+        _this.$Progress.start()
         await _this.$store.dispatch("$_homePage/setSearch", _this.search);
         await _this.$store.dispatch("$_homePage/getData");
+        _this.$Progress.finish()
       },
       async handleSort(){
         var _this = this;
+        _this.$Progress.start()
         _this.state.sortDirection = _this.state.sortDirection ==='asc' ? 'desc' : 'asc';
         await _this.$store.dispatch("$_homePage/getData");
+        _this.$Progress.finish()
       },
-      handleResize() {
+      async handleDelete(id){
         var _this = this;
-        _this.window.width = window.innerWidth;
-        _this.window.height = window.innerHeight;
+        _this.$Progress.start()
+        try {
+          await _this.$store.dispatch("$_homePage/deleteData", id);
+          await _this.$store.dispatch("$_homePage/getData");
+          _this.dialog = false;
+          _this.$Progress.finish()
+          _this.$notify({
+            title: 'Congratulations',
+            message: 'Successful',
+            type: 'success'
+          });
+        } catch (error) {
+          _this.$Progress.fail()
+          _this.$notify.error({
+            title: 'Error',
+            message: 'Fail'
+          });            
+        }
       }
     },
   };
@@ -126,9 +143,5 @@
   }
   table .icon{
     cursor: pointer;
-  }
-  .form-container{
-    /* width: 400px; */
-    margin: auto;
   }
 </style>

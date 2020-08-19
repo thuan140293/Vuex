@@ -14,9 +14,14 @@ const SET_ORDER_DIRECTION = (state, messages) => {
     state.sortDirection = messages;
 };
 
+const DELETE_DATA = (state, messages) => {
+    state.data = messages;
+};
+
 export default{
     SET_DATA,
     SET_SEARCH,
     SET_ORDERBY,
-    SET_ORDER_DIRECTION
+    SET_ORDER_DIRECTION,
+    DELETE_DATA
 }

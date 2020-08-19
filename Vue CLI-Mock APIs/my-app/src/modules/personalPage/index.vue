@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="form-container">
-      <h1 class="text-center">{{ data.name }}</h1>
       <form>
         <div class="form-group">
           <label for="name">Name</label>
