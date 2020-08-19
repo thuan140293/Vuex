@@ -28,11 +28,8 @@
 </template>
 
 <script>
-  import { mapState, mapGetters } from "vuex";
   export default {
-    components: {
-      
-    },
+    components: {},
     data() {
       return {
         formData: {
@@ -43,27 +40,8 @@
         }
       }
     },
-    computed: {
-      ...mapState({
-        stateRequest: state => state.$_formPage,
-      }),
-      ...mapGetters({
-        data: "$_formPage/getById",
-      })
-    },
-    async created() {
-      var _this = this;
-      _this.$Progress.start()
-      try {
-        if (_this.$route.params.id) {
-          await _this.$store.dispatch("$_formPage/getById", _this.$route.params.id);
-        }
-        _this.$Progress.finish()
-      } catch(error) {
-        console.log(error); 
-        _this.$Progress.fail()
-      }
-    },
+    computed: {},
+    created() {},
     methods:{
        async createData() {
         var _this = this;
