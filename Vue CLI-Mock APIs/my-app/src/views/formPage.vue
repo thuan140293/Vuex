@@ -12,7 +12,7 @@
 <script>
   import FormPage from '../modules/formPage';
   export default {
-    name: 'form',
+    name: 'formPage',
     components: {
       FormPage
     },
