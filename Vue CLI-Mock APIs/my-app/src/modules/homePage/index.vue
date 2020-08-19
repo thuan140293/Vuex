@@ -3,7 +3,7 @@
     <div class="form-container">
       <div class="row">
         <div class="col-md-8">
-          <button class="btn btn-primary" @click="redirectTo('/personal')">Create new</button>
+          <button class="btn btn-primary" @click="redirectTo('/form')">Create new</button>
         </div>
         <div class="col-md-4 text-right">
           <input class="form-control mb-3" v-model="search" @keyup="handleSearch" placeholder="Search..."/>
@@ -31,7 +31,9 @@
             <tr v-for="(item, index) in data" :key="index">
               <td>{{ item.id  }}</td>
               <!-- <td><img class="avatar mr-3" :src="item.avatar"/></td> -->
-              <td>{{ item.name }} </td>
+              <td>
+                <router-link :to="`personal/${item.id}`">{{ item.name }}</router-link>
+              </td>
               <td>{{ item.address }} </td>
               <td>{{ item.phone }} </td>
               <td class="text-center">

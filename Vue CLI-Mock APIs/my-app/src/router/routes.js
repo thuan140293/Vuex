@@ -10,7 +10,10 @@ export default new Router({
       name: 'homePage', path: '/', component: () => import('../views/homePage.vue'), display: 'Trang chủ'
     },
     {
-      name: 'personal', path: '/personal/:id?', component: () => import('../views/personalPage.vue'), display: 'Trang chi tiết'
+      name: 'personal', path: '/personal/:id', component: () => import('../views/personalPage.vue'), display: 'Trang chi tiết'
+    },
+    {
+      name: 'form', path: '/form/:id?', component: () => import('../views/formPage.vue'), display: 'Form'
     }
   ]
 });
