@@ -3,6 +3,9 @@
     <div class="form-detail">
       <h2>{{ data.name }} profile</h2>
       <div>
+        <img :src="data.avatar" class="img-fluid avatar"/>
+      </div>
+      <div>
         <span class="title mr-2">Name:</span>
         <span>{{ data.name }}</span>
       </div>
@@ -17,6 +20,18 @@
       <div>
         <span class="title mr-2">Country:</span>
         <span>{{ data.country }}</span>
+      </div>
+      <div>
+        <span class="title mr-2">Age:</span>
+        <span>{{ data.age }}</span>
+      </div>
+      <div>
+        <span class="title mr-2">Gender:</span>
+        <span>{{ data.gender }}</span>
+      </div>
+      <div>
+        <span class="title mr-2">Occupation:</span>
+        <span>{{ data.occupation }}</span>
       </div>
     </div>
   </div>
@@ -70,5 +85,8 @@
 
   .form-detail .title{
     font-weight: 600;
+  }
+  .avatar{
+    height: 150px;
   }
 </style>

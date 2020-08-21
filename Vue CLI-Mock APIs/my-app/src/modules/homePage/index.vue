@@ -23,7 +23,7 @@
                 <span class="mr-2">Address</span>
                   <font-awesome-icon :icon="['fas', 'sort']" class="icon" @click="handleSort(state.sortBy = 'address')" ></font-awesome-icon>
               </th>
-              <th>Phone</th>
+              <th>Occupation</th>
               <th></th>
             </tr>
           </thead>
@@ -35,7 +35,7 @@
                 <router-link :to="`personal/${item.id}`">{{ item.name }}</router-link>
               </td>
               <td>{{ item.address }} </td>
-              <td>{{ item.phone }} </td>
+              <td>{{ item.occupation }} </td>
               <td class="text-center">
                 <font-awesome-icon :icon="['fas', 'trash']" class="icon" @click="openModal(item.id)"></font-awesome-icon>
               </td>
