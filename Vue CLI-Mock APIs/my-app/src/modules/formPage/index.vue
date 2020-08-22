@@ -46,7 +46,7 @@
       </router-link>
       <div class="d-inline-block">
         <button type="button" class="btn btn-primary" @click="createData" v-if="!this.$route.params.id">Save changes</button>
-        <button type="button" class="btn btn-primary" @click="editData(id)" v-else>Edit changes</button>
+        <button type="button" class="btn btn-primary" @click="updateData" v-else>Edit changes</button>
       </div>
     </div>
   </div>
@@ -58,7 +58,6 @@
     components: {},
     data() {
       return {
-        id: '',
         formData: {
             name: '',
             address: '',
@@ -112,11 +111,10 @@
           });            
         }
       },
-      async editData() {
+      async updateData() {
         var _this = this;
-        _this.id = _this.$route.params.id;
         try {
-          await _this.$store.dispatch("$_formPage/editData", _this.id, _this.formData);
+          await _this.$store.dispatch("$_formPage/updateData", _this.$route.params.id, _this.formData);
           _this.$notify({
             title: 'Congratulations',
             message: 'Successful',
@@ -134,7 +132,7 @@
         var _this = this;
         var files = e.target.files;
         var size = files[0].size/1024;
-        if (files.length > 0 && size < 800){
+        if (files.length > 0 && size < 700){
           _this.overSize = false;
           _this.createImage(files[0]);       
         }else{

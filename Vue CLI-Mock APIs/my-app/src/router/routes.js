@@ -13,7 +13,7 @@ export default new Router({
       name: 'personal', path: '/personal/:id', component: () => import('../views/personalPage.vue'), display: 'Trang chi tiết'
     },
     {
-      name: 'form', path: '/form/:id?', component: () => import('../views/formPage.vue'), display: 'Giao diện'
+      name: 'form', path: '/form/:id?', component: () => import('../views/formPage.vue'), display: 'Mẫu đơn'
     }
   ]
 });

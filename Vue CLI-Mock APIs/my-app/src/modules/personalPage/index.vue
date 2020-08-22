@@ -3,35 +3,36 @@
     <div class="form-detail">
       <h2>{{ data.name }} profile</h2>
       <div>
-        <img :src="data.avatar" class="img-fluid avatar"/>
+        <img :src="data.avatar" class="img-fluid avatar" v-if="data.avatar"/>
+        <img src="@/assets/images/no-avatar.png" class="img-fluid avatar" v-else/>
       </div>
       <div>
         <span class="title mr-2">Name:</span>
-        <span>{{ data.name }}</span>
+        <span>{{ data.name ? data.name : 'No name'}}</span>
       </div>
       <div>
         <span class="title mr-2">Address:</span>
-        <span>{{ data.address }}</span>
+        <span>{{ data.address ? data.address : 'No address'}}</span>
       </div>
       <div>
         <span class="title mr-2">Phone:</span>
-        <span>{{ data.phone }}</span>
+        <span>{{ data.phone ? data.phone : 'No phone'}}</span>
       </div>
       <div>
         <span class="title mr-2">Country:</span>
-        <span>{{ data.country }}</span>
+        <span>{{ data.country ? data.country : 'No country'}}</span>
       </div>
       <div>
         <span class="title mr-2">Age:</span>
-        <span>{{ data.age }}</span>
+        <span>{{ data.age ? data.age : 'No age'}}</span>
       </div>
       <div>
         <span class="title mr-2">Gender:</span>
-        <span>{{ data.gender }}</span>
+        <span>{{ data.gender ? data.gender : 'No gender'}}</span>
       </div>
       <div>
         <span class="title mr-2">Occupation:</span>
-        <span>{{ data.occupation }}</span>
+        <span>{{ data.occupation ? data.gender : 'No occupation'}}</span>
       </div>
     </div>
   </div>

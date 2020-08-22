@@ -33,15 +33,17 @@
               <td>{{ item.id }}</td>
               <!-- <td><img class="avatar mr-3" :src="item.avatar"/></td> -->
               <td>
-                <router-link :to="`/personal/${item.id}`">{{ item.name }}</router-link>
+                <router-link :to="`/personal/${item.id}`">{{ item.name ? item.name : 'No name'}}</router-link>
               </td>
-              <td>{{ item.address }}</td>
-              <td>{{ item.occupation }}</td>
+              <td>{{ item.address ? item.address : 'No address'}}</td>
+              <td>{{ item.occupation ? item.occupation : ' No occupation' }}</td>
               <td class="text-center">
                 <font-awesome-icon :icon="['fas', 'trash']" class="icon" @click="openModal(item.id)"></font-awesome-icon>
               </td>
-              <td>
-                <router-link :to="`/form/${item.id}`">Edit</router-link>
+              <td class="text-center">
+                <router-link :to="`/form/${item.id}`">
+                  <font-awesome-icon :icon="['fas', 'edit']" class="icon"></font-awesome-icon>
+                </router-link>
               </td>
             </tr>
           </tbody>    
@@ -113,18 +115,23 @@
         var _this = this;
         _this.$Progress.start()
         await _this.$store.dispatch("$_homePage/setSearch", _this.search);
+        await _this.$store.dispatch("$_homePage/getDataNoPaging");
         await _this.$store.dispatch("$_homePage/getData");
         _this.$Progress.finish()
       },
       async handleSizeChange(val) {
         var _this = this;
+        _this.$Progress.start()
         _this.state.limit = val;
         await _this.$store.dispatch("$_homePage/getData");
+        _this.$Progress.finish()
       },
       async handleCurrentChange(val) {
         var _this = this;
+        _this.$Progress.start()
         _this.state.page = val;
         await _this.$store.dispatch("$_homePage/getData");
+        _this.$Progress.finish()
       },
       async handleSort(){
         var _this = this;

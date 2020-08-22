@@ -6,7 +6,7 @@ const getData = async (context) => {
 };
 
 const getDataNoPaging = async (context) => {
-  let response = await api.getDataNoPaging();
+  let response = await api.getDataNoPaging(context.state.search);
   context.commit('SET_DATA_NO_PAGING', response);
 };
 
