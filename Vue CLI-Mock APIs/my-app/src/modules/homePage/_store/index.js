@@ -6,7 +6,10 @@ const state = {
   data: null,
   search: "",
   sortBy: [],
-	sortDirection: 'asc',
+  sortDirection: 'asc',
+  page: 1,
+  limit: 5,
+  total: null
 }
 
 export default {

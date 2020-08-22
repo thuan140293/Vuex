@@ -44,16 +44,21 @@
       <router-link :to="`/`">
         <button type="button" class="btn btn-secondary mr-3">Back</button>
       </router-link>
-      <button type="button" class="btn btn-primary" @click="createData">Save changes</button>
+      <div class="d-inline-block">
+        <button type="button" class="btn btn-primary" @click="createData" v-if="!this.$route.params.id">Save changes</button>
+        <button type="button" class="btn btn-primary" @click="editData(id)" v-else>Edit changes</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapState, mapGetters } from "vuex";
   export default {
     components: {},
     data() {
       return {
+        id: '',
         formData: {
             name: '',
             address: '',
@@ -67,13 +72,51 @@
         overSize: false,
       }
     },
-    computed: {},
-    created() {},
+    computed: {
+      ...mapState({
+        stateRequest: state => state.$_formPage,
+      }),
+      ...mapGetters({
+        dataDetail: "$_formPage/getById",
+      })
+    },
+    async created() {
+      var _this = this;
+      _this.$Progress.start()
+      try {
+        if (_this.$route.params.id) {
+          await _this.$store.dispatch("$_formPage/getById", _this.$route.params.id);
+          _this.formData =  Object.assign(_this.dataDetail);
+        }
+        _this.$Progress.finish()
+      } catch(error) {
+        console.log(error); 
+        _this.$Progress.fail()
+      }
+    },
     methods:{
        async createData() {
         var _this = this;
         try {
           await _this.$store.dispatch("$_formPage/createData", _this.formData);
+          _this.$notify({
+            title: 'Congratulations',
+            message: 'Successful',
+            type: 'success'
+          });
+           _this.$router.push("/");
+        } catch (error) {
+          _this.$notify.error({
+            title: 'Error',
+            message: 'Fail'
+          });            
+        }
+      },
+      async editData() {
+        var _this = this;
+        _this.id = _this.$route.params.id;
+        try {
+          await _this.$store.dispatch("$_formPage/editData", _this.id, _this.formData);
           _this.$notify({
             title: 'Congratulations',
             message: 'Successful',

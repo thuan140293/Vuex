@@ -10,7 +10,13 @@ const createData = async (context, request) => {
   context.commit('CREATE_DATA', response);
 };
 
+const editData = async (context, request) => {
+  let response = await api.editData(request);
+  context.commit('EDIT_DATA', response);
+}
+
 export default {
   getById,
-  createData
+  createData,
+  editData
 }
