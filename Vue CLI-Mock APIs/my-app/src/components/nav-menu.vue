@@ -32,6 +32,9 @@
         commonRoute: [
           {
             name: 'homePage', path: '/', display: 'Home',
+          },
+          {
+            name: 'blogPage', path: '/blogs', display: 'Blogs',
           }
         ]
       }

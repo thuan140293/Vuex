@@ -14,6 +14,9 @@ export default new Router({
     },
     {
       name: 'form', path: '/form/:id?', component: () => import('../views/formPage.vue'), display: 'Mẫu đơn'
+    },
+    {
+      name: 'blogs', path: '/blogs/:id?', component: () => import('../views/blogPage.vue'), display: 'Bài viết'
     }
   ]
 });

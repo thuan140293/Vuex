@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import homeModule from '../modules/homePage/_store';
 import personalModule from '../modules/personalPage/_store';
 import formModule from '../modules/formPage/_store';
+import blogModule from '../modules/blogPage/_store';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -10,5 +11,6 @@ export default new Vuex.Store({
     $_homePage: homeModule,
     $_personalPage: personalModule,
     $_formPage: formModule,
+    $_blogPage: blogModule,
   },
 })
