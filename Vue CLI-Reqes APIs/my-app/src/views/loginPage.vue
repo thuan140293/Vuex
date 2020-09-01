@@ -3,18 +3,18 @@
     <div class="container margin-y">
       <div class="row">
         <div class="col-12">
-          <LogInPage />
+          <LoginPage />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-  import LogInPage from '../modules/logInPage';
+  import LoginPage from '../modules/loginPage';
   export default {
-    name: 'logInPage',
+    name: 'loginPage',
     components: {
-      LogInPage
+      LoginPage
     },
   };
 </script>

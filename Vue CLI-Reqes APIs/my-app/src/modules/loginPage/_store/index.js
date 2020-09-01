@@ -3,8 +3,7 @@ import getters from '../_store/getters';
 import mutations from '../_store/mutations';
 
 const state = {
-  token: null,
-  currentUser: null
+  token: localStorage.getItem('token'),
 }
 
 export default {

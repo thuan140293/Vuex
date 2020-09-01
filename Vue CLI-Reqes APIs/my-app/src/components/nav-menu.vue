@@ -19,14 +19,14 @@
       <ul class="navbar-nav ml-auto align-items-center justify-content-between">
         <li class="nav-item" v-for="(route, index) in commonRouteRight" :key="index">
           <router-link :to ="route.path" exact-active-class="active">
-            <a class="nav-link" v-if="!currentUser">
+            <a class="nav-link" v-if="!state.token">
               {{route.display.toUpperCase()}}
             </a>
+            <div class="d-flex" v-else>
+              <a class="nav-link mr-3">{{state.token}}</a>
+              <a href="javascript:;" class="nav-link" @click="signOut(), redirectTo('/login')">ĐĂNG XUẤT</a>
+            </div>
           </router-link>
-          <div class="d-flex">
-            <a class="nav-link mr-3" v-if="currentUser">{{currentUser}}</a>
-            <a href="javascript:;" class="nav-link" v-if="currentUser" @click="signOut(), redirectTo('/login')">ĐĂNG XUẤT</a>
-          </div>
         </li>
       </ul>
     </div>
@@ -35,7 +35,7 @@
 
 <script>
   import vuex from '@/assets/images/vuex.png';
-  import { mapGetters } from "vuex";
+  import { mapState } from "vuex";
 
   export default {
     components: {},
@@ -56,9 +56,9 @@
       }
     },
     computed: {
-      ...mapGetters({
-        currentUser: "$_logInPage/currentUser",
-      })
+      ...mapState({
+        state: state => state.$_loginPage,
+      }),
     },
     created() {},
     methods:{
@@ -71,7 +71,7 @@
       },
       signOut: async function () {
         var _this = this
-        _this.$store.dispatch("$_logInPage/SignOut");
+        _this.$store.dispatch("$_loginPage/SignOut");
       }
     }
   }

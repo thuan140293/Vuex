@@ -38,7 +38,7 @@
       login: _.debounce(async function () {
         var _this = this;
             try {
-              await _this.$store.dispatch("$_logInPage/LogIn", _this.formData);
+              await _this.$store.dispatch("$_loginPage/LogIn", _this.formData);
               _this.$notify({
                 title: 'Chúc mừng',
                 message: 'Đăng nhập thành công',

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import state from '../modules/logInPage/_store/index'
+import state from '../modules/loginPage/_store/index'
 
 export default async function auth(to, from, next) {
     const token = localStorage.getItem('token');
