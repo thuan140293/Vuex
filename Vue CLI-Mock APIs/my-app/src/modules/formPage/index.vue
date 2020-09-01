@@ -46,7 +46,7 @@
       </router-link>
       <div class="d-inline-block">
         <button type="button" class="btn btn-primary" @click="createData" v-if="!this.$route.params.id">Save changes</button>
-        <button type="button" class="btn btn-primary" @click="updateData" v-else>Edit changes</button>
+        <button type="button" class="btn btn-primary" @click="updateData(id)" v-else>Edit changes</button>
       </div>
     </div>
   </div>
@@ -54,6 +54,7 @@
 
 <script>
   import { mapState, mapGetters } from "vuex";
+  import _ from 'lodash'
   export default {
     components: {},
     data() {
@@ -85,7 +86,7 @@
       try {
         if (_this.$route.params.id) {
           await _this.$store.dispatch("$_formPage/getById", _this.$route.params.id);
-          _this.formData =  Object.assign(_this.dataDetail);
+          _this.formData = _.cloneDeep(_this.dataDetail);
         }
         _this.$Progress.finish()
       } catch(error) {
@@ -111,10 +112,11 @@
           });            
         }
       },
-      async updateData() {
+      async updateData(id) {
         var _this = this;
+        id = _this.$route.params.id;
         try {
-          await _this.$store.dispatch("$_formPage/updateData", _this.$route.params.id, _this.formData);
+          await _this.$store.dispatch("$_formPage/updateData", id, _this.formData);
           _this.$notify({
             title: 'Congratulations',
             message: 'Successful',

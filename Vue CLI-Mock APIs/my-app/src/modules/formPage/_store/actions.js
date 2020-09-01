@@ -12,7 +12,7 @@ const createData = async (context, request) => {
 
 const updateData = async (context, request) => {
   let response = await api.updateData(request);
-  context.commit('EDIT_DATA', response);
+  context.commit('UPDATE_DATA', response);
 }
 
 export default {
