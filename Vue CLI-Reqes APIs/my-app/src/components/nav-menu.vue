@@ -22,11 +22,11 @@
             <a class="nav-link" v-if="!state.token">
               {{route.display.toUpperCase()}}
             </a>
-            <div class="d-flex" v-else>
-              <a class="nav-link mr-3">{{state.token}}</a>
-              <a href="javascript:;" class="nav-link" @click="signOut(), redirectTo('/login')">ĐĂNG XUẤT</a>
-            </div>
           </router-link>
+          <div class="d-flex" v-if="state.token">
+            <a class="nav-link mr-3">{{state.token}}</a>
+            <a href="javascript:;" class="nav-link" @click="signOut(), redirectTo('/login')">ĐĂNG XUẤT</a>
+          </div>
         </li>
       </ul>
     </div>

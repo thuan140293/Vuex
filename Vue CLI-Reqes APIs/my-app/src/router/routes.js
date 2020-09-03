@@ -14,7 +14,7 @@ export default new Router({
       name: 'detailPage', path: '/detail/:id', component: () => import('../views/detailPage.vue'), display: 'Chi tiết',  beforeEnter: auth
     },
     {
-      name: 'login', path: '/login', component: () => import('../views/loginPage.vue'), display: 'Đăng nhập'
+      name: 'login', path: '/login', component: () => import('../views/loginPage.vue'), display: 'Đăng nhập', meta: { allowAnonymous: true }
     },
   ]
 });

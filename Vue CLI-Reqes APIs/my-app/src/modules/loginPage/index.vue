@@ -11,7 +11,7 @@
           <label for="password">Mật khẩu</label>
           <input type="password" class="form-control" id="password" v-model="formData.password">
         </div>
-        <button type="submit" class="btn btn-primary" @click="login()">Đăng nhập</button>
+        <button type="submit" class="btn btn-primary" @click="login">Đăng nhập</button>
       </form>
     </div>
   </div>
@@ -31,27 +31,25 @@
         },
       }
     },
-    computed: {
-      
-    },
+    computed: {},
     methods:{
       login: _.debounce(async function () {
         var _this = this;
-            try {
-              await _this.$store.dispatch("$_loginPage/LogIn", _this.formData);
-              _this.$notify({
-                title: 'Chúc mừng',
-                message: 'Đăng nhập thành công',
-                type: 'success'
-              });
-              _this.$router.push("/");
-            }
-            catch (error) {
-              _this.$notify.error({
-                title: 'Thất bại',
-                message: 'Đăng nhập thất bại'
-              });
-            }
+        try {
+          await _this.$store.dispatch("$_loginPage/LogIn", _this.formData);
+          _this.$notify({
+            title: 'Chúc mừng',
+            message: 'Đăng nhập thành công',
+            type: 'success'
+          });
+          _this.$router.push("/");
+        }
+        catch (error) {
+          _this.$notify.error({
+            title: 'Thất bại',
+            message: 'Đăng nhập thất bại'
+          });
+        }
       }, 500),
     }
   };
