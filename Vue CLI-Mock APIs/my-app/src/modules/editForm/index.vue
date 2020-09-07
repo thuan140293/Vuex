@@ -45,7 +45,7 @@
         <button type="button" class="btn btn-secondary mr-3">Back</button>
       </router-link>
       <div class="d-inline-block">
-        <button type="button" class="btn btn-primary" @click="createData">Save changes</button>
+        <button type="button" class="btn btn-primary" @click="updateData">Edit changes</button>
       </div>
     </div>
   </div>
@@ -53,12 +53,12 @@
 
 <script>
   import { mapState, mapGetters } from "vuex";
-  // import _ from 'lodash'
+  import _ from 'lodash'
   export default {
     components: {},
     data() {
       return {
-        formData: {
+         formData: {
             name: '',
             address: '',
             phone: '',
@@ -73,19 +73,31 @@
     },
     computed: {
       ...mapState({
-        stateRequest: state => state.$_formPage,
+        stateRequest: state => state.$_editForm,
       }),
       ...mapGetters({
-        // dataDetail: "$_formPage/getById",
-      })
+        dataDetail: "$_editForm/getById",
+      }),
     },
     async created() {
+      var _this = this;
+      _this.$Progress.start()
+      try {
+        if (_this.$route.params.id) {
+          await _this.$store.dispatch("$_editForm/getById", _this.$route.params.id);
+          _this.formData = _.cloneDeep(_this.dataDetail);
+        }
+        _this.$Progress.finish()
+      } catch(error) {
+        console.log(error); 
+        _this.$Progress.fail()
+      }
     },
     methods:{
-       async createData() {
+      async updateData() {
         var _this = this;
         try {
-          await _this.$store.dispatch("$_formPage/createData", _this.formData);
+          await _this.$store.dispatch("$_editForm/updateData", _this.$route.params.id, _this.formData);
           _this.$notify({
             title: 'Congratulations',
             message: 'Successful',
