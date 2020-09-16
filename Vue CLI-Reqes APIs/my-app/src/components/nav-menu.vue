@@ -48,7 +48,7 @@
             name: 'homePage', path: '/', display: 'Trang chủ',
           },
           {
-            name: 'pagination', path: '/pagination', display: 'Phân trang',
+            name: 'example', path: '/example', display: 'Ví dụ',
           }
         ],
         commonRouteRight: [
