@@ -16,5 +16,8 @@ export default new Router({
     {
       name: 'login', path: '/login', component: () => import('../views/loginPage.vue'), display: 'Đăng nhập', meta: { allowAnonymous: true }
     },
+    {
+      name: 'pagination', path: '/pagination', component: () => import('../views/paginationExample.vue'), display: 'Pagination', beforeEnter: auth
+    },
   ]
 });

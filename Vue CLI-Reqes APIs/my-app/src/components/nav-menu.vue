@@ -24,7 +24,7 @@
             </a>
           </router-link>
           <div class="d-flex" v-if="state.token">
-            <a class="nav-link mr-3">{{state.token}}</a>
+            <a class="nav-link mr-3">{{currentUser}}</a>
             <a href="javascript:;" class="nav-link" @click="signOut(), redirectTo('/login')">ĐĂNG XUẤT</a>
           </div>
         </li>
@@ -35,7 +35,7 @@
 
 <script>
   import vuex from '@/assets/images/vuex.png';
-  import { mapState } from "vuex";
+  import { mapState, mapGetters } from "vuex";
 
   export default {
     components: {},
@@ -46,6 +46,9 @@
         commonRoute: [
           {
             name: 'homePage', path: '/', display: 'Trang chủ',
+          },
+          {
+            name: 'pagination', path: '/pagination', display: 'Phân trang',
           }
         ],
         commonRouteRight: [
@@ -59,6 +62,9 @@
       ...mapState({
         state: state => state.$_loginPage,
       }),
+      ...mapGetters({
+        currentUser: "$_loginPage/currentUser",
+      })
     },
     created() {},
     methods:{

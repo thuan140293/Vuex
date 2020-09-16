@@ -41,7 +41,7 @@
                 <font-awesome-icon :icon="['fas', 'trash']" class="icon" @click="openModal(item.id)"></font-awesome-icon>
               </td>
               <td class="text-center">
-                <router-link :to="`/editForm/${item.id}`">
+                <router-link :to="`/form/${item.id}`">
                   <font-awesome-icon :icon="['fas', 'edit']" class="icon"></font-awesome-icon>
                 </router-link>
               </td>

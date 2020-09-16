@@ -1,7 +1,7 @@
-const CREATE_DATA = (state, messages) => {
-    state.data = messages
-}
+const SET_DATA = (state, messages) => {
+    state.data = messages.data;
+};
 
 export default{
-    CREATE_DATA
+    SET_DATA
 }

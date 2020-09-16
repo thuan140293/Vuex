@@ -4,6 +4,7 @@ import mutations from '../_store/mutations';
 
 const state = {
   token: localStorage.getItem('token'),
+  currentUser: localStorage.getItem('user')
 }
 
 export default {
