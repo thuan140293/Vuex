@@ -1,22 +1,35 @@
 <template>
   <div>
-    <div class="row justify-content-end">
+    <div class="row justify-content-end mb-3">
       <div class="col-6">
-        <el-input v-model="search" size="mini" placeholder="Type to search"/>
+        <input class="form-control" v-model="search" placeholder="Type to search" />
       </div>
     </div>
-    <el-table :data="filterTable"
-      style="width: 100%"
-    >
-      <el-table-column label="Date" prop="date"></el-table-column>
-      <el-table-column label="Name" prop="name"></el-table-column>
-      <el-table-column align="right">
-        <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, index) in filterTable" :key="index">
+          <td>{{ item.date }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.address }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="query.pageIndex"
+      :page-sizes="[5, 10, 15, 20]"
+      :page-size="query.limit"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="tableData.length"
+    ></el-pagination>
   </div>
 </template>
 
@@ -42,26 +55,49 @@ export default {
           address: "No. 189, Grove St, Los Angeles",
         },
         {
+          date: "2016-05-04",
+          name: "Morgan",
+          address: "No. 189, Grove St, Los Angeles",
+        },
+        {
+          date: "2016-05-04",
+          name: "Morgan",
+          address: "No. 189, Grove St, Los Angeles",
+        },
+        {
+          date: "2016-05-01",
+          name: "Jessy",
+          address: "No. 189, Grove St, Los Angeles",
+        },
+        {
           date: "2016-05-01",
           name: "Jessy",
           address: "No. 189, Grove St, Los Angeles",
         },
       ],
       search: "",
+      query: {
+        pageIndex: 1,
+        limit: 5,
+      },
     };
   },
   computed: {
-    filterTable(){
-      return this.tableData.filter(item => !this.search || item.name.toLowerCase().includes(this.search.toLowerCase()));
-    }
+    filterTable() {
+      if(this.search && this.search.length){
+        return this.tableData.filter((item) => !this.search || item.name.toLowerCase().includes(this.search.toLowerCase()));
+      }
+      return this.tableData.slice((this.query.pageIndex-1) * this.query.limit, this.query.pageIndex * this.query.limit);
+    },
   },
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row);
+    handleSizeChange(val) {
+      this.query.limit = val;
+      this.filterTable;
     },
-    handleDelete(index, row) {
-      console.log(index, row);
-      this.tableData.splice(index, 1)
+    handleCurrentChange(val) {
+      this.query.pageIndex = val;
+      this.filterTable;
     },
   },
 };
