@@ -9,7 +9,7 @@ const createData = async (request) => {
 }
 
 const updateData = async (request) => {
-    return Vue.prototype.$http.put(`https://5efd8910dd373900160b321d.mockapi.io/listUser/${request}`);
+    return Vue.prototype.$http.put(`https://5efd8910dd373900160b321d.mockapi.io/listUser/${request.id}`, request);
 }
 
 export default {

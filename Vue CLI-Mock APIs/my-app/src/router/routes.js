@@ -15,8 +15,5 @@ export default new Router({
     {
       name: 'form', path: '/form/:id?', component: () => import('../views/formPage.vue'), display: 'Tạo đơn'
     },
-    {
-      name: 'editForm', path: '/editForm/:id', component: () => import('../views/editForm.vue'), display: 'Sửa đơn'
-    }
   ]
 });

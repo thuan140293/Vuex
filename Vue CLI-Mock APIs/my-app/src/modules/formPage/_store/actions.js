@@ -2,7 +2,7 @@ import api from '../_api/index';
 // import _ from 'lodash'
 
 const createData = async (context, request) => {
-  let response = request.id && request.id != '' ? await api.updateData(request.id) : await api.createData(request);
+  let response = request && request != '' ? await api.updateData(request) : await api.createData(request);
   return response;
 };
 
