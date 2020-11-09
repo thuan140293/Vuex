@@ -49,7 +49,7 @@
         <div class="form-group">
           <label for="age">Age</label>
           <input
-            type="phone"
+            type="number"
             class="form-control"
             id="age"
             aria-describedby="age"
@@ -59,25 +59,25 @@
         </div>
         <div class="form-group">
           <label for="gender">Gender</label>
-          <input
-            type="phone"
-            class="form-control"
-            id="gender"
-            aria-describedby="gender"
-            placeholder="Enter gender"
-            v-model="formData.gender"
-          />
+          <el-select class="d-block" v-model="formData.gender" placeholder="Select" @change="handleChangeGender">
+            <el-option
+              v-for="item in commonData.genderOptions"
+              :key="item.code"
+              :label="item.name"
+              :value="item.code">
+            </el-option>
+          </el-select>
         </div>
         <div class="form-group">
           <label for="occupation">Occupation</label>
-          <input
-            type="phone"
-            class="form-control"
-            id="occupation"
-            aria-describedby="occupation"
-            placeholder="Enter occupation"
-            v-model="formData.occupation"
-          />
+          <el-select class="d-block" v-model="formData.occupation" placeholder="Select" @change="handleChangeOccupation">
+            <el-option
+              v-for="item in commonData.occupationOptions"
+              :key="item.code"
+              :label="item.name"
+              :value="item.code">
+            </el-option>
+          </el-select>
         </div>
         <div class="form-group">
           <div v-if="!formData.avatar">
@@ -93,8 +93,11 @@
       <router-link :to="`/`">
         <button type="button" class="btn btn-secondary mr-3">Back</button>
       </router-link>
-      <div class="d-inline-block">
-        <button type="button" class="btn btn-primary" @click="createData">Save changes</button>
+      <div class="d-inline-block" v-if="this.$route.params.id">
+        <button type="button" class="btn btn-primary" @click="updateData">Update</button>
+      </div>
+      <div class="d-inline-block" v-else>
+        <button type="button" class="btn btn-primary" @click="createData">Create</button>
       </div>
     </div>
   </div>
@@ -103,10 +106,12 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import _ from "lodash";
+import commonData from "../../utils/common-data/index"
 export default {
   components: {},
   data() {
     return {
+      commonData,
       formData: {
         name: "",
         address: "",
@@ -160,6 +165,23 @@ export default {
         });
       }
     },
+    async updateData() {
+      var _this = this;
+      try {
+        await _this.$store.dispatch("$_formPage/updateData", _this.formData);
+        _this.$notify({
+          title: "Congratulations",
+          message: "Successful",
+          type: "success",
+        });
+        _this.$router.push("/");
+      } catch (error) {
+        _this.$notify.error({
+          title: "Error",
+          message: "Fail",
+        });
+      }
+    },
     onFileChange(e) {
       var _this = this;
       var files = e.target.files;
@@ -187,6 +209,14 @@ export default {
       var _this = this;
       _this.formData.avatar = "";
     },
+    handleChangeGender(e){
+      var _this = this;
+      _this.formData.gender = e;
+    },
+    handleChangeOccupation(e){
+       var _this = this;
+      _this.formData.occupation = e;
+    }
   },
 };
 </script>

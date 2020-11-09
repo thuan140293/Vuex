@@ -4,7 +4,6 @@ import mutations from '../_store/mutations';
 
 const state = {
   data: null,
-  blogs: null
 }
 
 export default {

@@ -5,6 +5,18 @@ const getById = async (context, request) => {
   context.commit('SET_DATA', response);
 };
 
+const getBlogList = async (context, request) => {
+  let response = await api.getBlogList(request);
+  context.commit('SET_BLOG_LIST', response);
+};
+
+const deleteBlog = async (context, request) => {
+  let response = await api.deleteBlog(request);
+  return response;
+};
+
 export default {
-  getById
+  getById,
+  getBlogList,
+  deleteBlog
 }

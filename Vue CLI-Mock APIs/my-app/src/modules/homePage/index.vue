@@ -36,14 +36,16 @@
                 <router-link :to="`/personal/${item.id}`">{{ item.name ? item.name : 'No name'}}</router-link>
               </td>
               <td>{{ item.address ? item.address : 'No address'}}</td>
-              <td>{{ item.occupation ? item.occupation : ' No occupation' }}</td>
-              <td class="text-center">
-                <font-awesome-icon :icon="['fas', 'trash']" class="icon" @click="openModal(item.id)"></font-awesome-icon>
-              </td>
+              <td>{{ item.occupation ? commonData.occupationOptions.find(x => x.code === item.occupation).name : ' No occupation' }}</td>
               <td class="text-center">
                 <router-link :to="`/form/${item.id}`">
                   <font-awesome-icon :icon="['fas', 'edit']" class="icon"></font-awesome-icon>
+                  <span class="ml-2">Edit</span>
                 </router-link>
+              </td>
+              <td class="text-center">
+                <font-awesome-icon :icon="['fas', 'trash']" class="icon" @click="openModal(item.id)"></font-awesome-icon>
+                 <span class="ml-2">Delete</span>
               </td>
             </tr>
           </tbody>    
@@ -59,7 +61,7 @@
           :total="state.total">
         </el-pagination>
       </div>
-       <el-dialog title="Are you sure that you want to delete this item?" :visible.sync="dialog">
+      <el-dialog title="Are you sure that you want to delete this item?" :visible.sync="dialog">
         <button class="btn btn-secondary mr-2" @click="dialogTableVisible = false">Hủy</button>
         <button class="btn btn-primary" @click="handleDelete(id)">Xác nhận</button>
       </el-dialog>
@@ -69,10 +71,12 @@
 
 <script>
   import { mapState, mapGetters } from "vuex";
+  import commonData from '../../utils/common-data/index'
   export default {
     components: {},
     data() {
       return {
+        commonData,
         search:'',
         id:'',
         dialog: false

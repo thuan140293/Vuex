@@ -1,16 +1,29 @@
-// const commonRoute = [
-//   {
-//     name: 'Home', path: '/', display: 'Home',
-//   },
-//   {
-//     name: 'Register', path: '/register', display: 'Đăng ký',
-//   },
-//   {
-//     name: 'Login', path: '/login', display: 'Đăng nhập',
-//   }
-// ]
+const genderOptions = [
+    {
+        name: 'Male', code: 'male'
+    },
+    {
+        name: 'Female', code: 'female'
+    }
+]
+
+const occupationOptions = [
+    {
+        name: 'Front End', code: 'FE'
+    },
+    {
+        name: 'Back End', code: 'BE'
+    },
+    {
+        name: 'Business Analyst', code: 'BA'
+    },
+    {
+        name: 'Project Manager', code: 'PM'
+    }
+]
 
 
-// export default {
-//   commonRoute
-// }
+export default {
+    genderOptions,
+    occupationOptions
+}
