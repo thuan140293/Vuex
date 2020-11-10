@@ -41,3 +41,8 @@ a:focus{
 .el-pagination__sizes .el-input .el-input__inner:hover{
   border-color: #009900;
 }
+
+.el-dialog__body{
+  height: calc(100vh - 350px);
+  overflow: auto;
+}

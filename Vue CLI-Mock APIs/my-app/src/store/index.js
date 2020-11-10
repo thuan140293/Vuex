@@ -12,6 +12,6 @@ export default new Vuex.Store({
     $_homePage: homeModule,
     $_personalPage: personalModule,
     $_formPage: formModule,
-    $_formBlogs: formBlogsModule
+    $_formBlogs: formBlogsModule,
   },
 })

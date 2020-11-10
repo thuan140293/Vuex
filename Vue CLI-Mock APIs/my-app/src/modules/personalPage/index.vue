@@ -37,6 +37,10 @@
             <span>{{ data.occupation ? commonData.occupationOptions.find(x => x.code === data.occupation).name : 'No occupation'}}</span>
           </div>
           <div class="form-group">
+            <span class="title mr-2">Hobbies:</span>
+            <span>{{ data.hobbies ?  commonData.hobbiesOptions.filter(x => data.hobbies.includes(x.code)).map(x => x.name).join(", ") : 'No hobbies'}}</span>
+          </div>
+          <div class="form-group">
             <button class="btn btn-primary" @click="redirectTo(`/blog/${data.id}`)">Create new blog</button>
           </div>
         </div>
@@ -51,10 +55,12 @@
               <th>Action</th>
             </tr>
             <tr v-for="item in blogs" :key="item.id">
-              <td>{{ item.title ? item.title : 'No title' }}</td>
-              <td>{{ item.createdAt.slice(0, 10) }}</td>
               <td>
-                <a href="javascript:;" @click="deleteBlogs(item.id)">
+                <a href="javascript:;" @click="openModalBlogDetail(item.id)">{{ item.title ? item.title.substring(0, 25) + '...' : 'No title' }}</a>
+              </td>
+              <td>{{ item.formatCreatedAt }}</td>
+              <td>
+                <a href="javascript:;" @click="openModalBlog(item.id)">
                   <font-awesome-icon :icon="['fas', 'trash']" class="icon"></font-awesome-icon>
                   <span class="ml-2">Delete a blog</span> 
                 </a>
@@ -64,6 +70,10 @@
         </div>
       </div>
     </div>
+    <el-dialog :title="blogDetail.title" :visible.sync="dialogBlogDetail">
+      <div v-html="blogDetail.content"></div>
+    </el-dialog>
+    
     <el-dialog title="Are you sure that you want to delete this item?" :visible.sync="dialogBlog">
       <button class="btn btn-secondary mr-2" @click="dialogBlog = false">Hủy</button>
       <button class="btn btn-primary" @click="deleteBlogs(id)">Xác nhận</button>
@@ -73,13 +83,15 @@
 
 <script>
   import { mapState, mapGetters } from "vuex";
+  // import _ from "lodash";
   import commonData from '../../utils/common-data/index'
   export default {
     components: {},
     data() {
       return {
         commonData,
-        dialogBlog: false
+        dialogBlog: false,
+        dialogBlogDetail: false
       }
     },
     computed: {
@@ -89,7 +101,8 @@
       ...mapGetters({
         data: "$_personalPage/getById",
         blogs: "$_personalPage/getBlogList",
-      })
+        blogDetail: "$_personalPage/getBlogDetail"
+      }),
     },
     async created() {
       var _this = this;
@@ -97,7 +110,7 @@
       try {
         if (_this.$route.params.id) {
           await _this.$store.dispatch("$_personalPage/getById", _this.$route.params.id);
-          await _this.$store.dispatch("$_personalPage/getBlogList", _this.$route.params.id)
+          await _this.$store.dispatch("$_personalPage/getBlogList", _this.$route.params.id);
         }
         _this.$Progress.finish()
       } catch(error) {
@@ -118,11 +131,17 @@
         _this.dialogBlog = true;
         _this.id = id;
       },
+      async openModalBlogDetail(id){
+        var _this = this;
+        _this.dialogBlogDetail = true;
+        _this.id = id;
+        await _this.$store.dispatch("$_personalPage/getBlogDetail", { parentId: _this.$route.params.id, id: id});
+      },
       async deleteBlogs(id){
         var _this = this;
         _this.$Progress.start()
         try {
-          await _this.$store.dispatch("$_personalPage/deleteBlog", id);
+          await _this.$store.dispatch("$_personalPage/deleteBlog", { parentId: _this.$route.params.id, id: id});
           await _this.$store.dispatch("$_personalPage/getBlogList", _this.$route.params.id)
           _this.dialogBlog = false;
           _this.$Progress.finish()

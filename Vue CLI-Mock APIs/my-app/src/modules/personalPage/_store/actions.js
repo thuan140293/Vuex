@@ -15,8 +15,14 @@ const deleteBlog = async (context, request) => {
   return response;
 };
 
+const getBlogDetail = async (context, request) => {
+  let response = await api.getBlogDetail(request);
+  context.commit('SET_BLOG_DETAIL', response);
+};
+
 export default {
   getById,
   getBlogList,
-  deleteBlog
+  deleteBlog,
+  getBlogDetail
 }

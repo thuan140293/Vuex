@@ -80,6 +80,17 @@
           </el-select>
         </div>
         <div class="form-group">
+          <label for="occupation">Hobbies</label>
+          <el-select class="d-block" v-model="formData.hobbies" multiple placeholder="Select">
+            <el-option
+              v-for="item in commonData.hobbiesOptions"
+              :key="item.code"
+              :label="item.name"
+              :value="item.code">
+            </el-option>
+          </el-select>
+        </div>
+        <div class="form-group">
           <div v-if="!formData.avatar">
             <input type="file" id="avatar" name="avatar" @change="onFileChange" />
           </div>
@@ -120,6 +131,7 @@ export default {
         age: "",
         gender: "",
         occupation: "",
+        hobbies: [],
         avatar: "",
       },
       overSize: false,
@@ -168,7 +180,7 @@ export default {
     async updateData() {
       var _this = this;
       try {
-        await _this.$store.dispatch("$_formPage/updateData", _this.formData);
+        await _this.$store.dispatch("$_formPage/updateData", { id: _this.$route.params.id, formData: _this.formData});
         _this.$notify({
           title: "Congratulations",
           message: "Successful",

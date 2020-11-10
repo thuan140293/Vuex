@@ -30,7 +30,7 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import _ from "lodash";
+// import _ from "lodash";
 import commonData from "../../utils/common-data/index";
 import { VueEditor } from "vue2-editor";
 
@@ -59,7 +59,6 @@ export default {
     try {
       if (_this.$route.params.id) {
         await _this.$store.dispatch("$_formBlogs/getById", _this.$route.params.id);
-        _this.formData = _.cloneDeep(_this.data);
       }
       _this.$Progress.finish();
     } catch (error) {
@@ -71,13 +70,13 @@ export default {
     async createBlog() {
       var _this = this;
       try {
-        await _this.$store.dispatch(`$_formBlogs/createBlog`, _this.formData);
+        await _this.$store.dispatch(`$_formBlogs/createBlog`, { id: _this.$route.params.id,  formData: _this.formData });
         _this.$notify({
           title: "Congratulations",
           message: "Successful",
           type: "success",
         });
-        _this.$router.push("/");
+        _this.$router.push(`/personal/${_this.$route.params.id}`);
       } catch (error) {
         _this.$notify.error({
           title: "Error",

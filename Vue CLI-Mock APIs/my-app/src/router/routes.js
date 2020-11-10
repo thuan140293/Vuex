@@ -16,7 +16,7 @@ export default new Router({
       name: 'form', path: '/form/:id?', component: () => import('../views/formPage.vue'), display: 'Tạo đơn'
     },
     {
-      name: 'blog', path: '/blog/:id', component: () => import('../views/formBlogs.vue'), display: 'Tạo blog'
-    },
+      name: 'blogDetail', path: '/blog/:id', component: () => import('../views/formBlogs.vue'), display: 'Tạo blog'
+    }
   ]
 });
