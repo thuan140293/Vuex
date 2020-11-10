@@ -43,6 +43,6 @@ a:focus{
 }
 
 .el-dialog__body{
-  height: calc(100vh - 350px);
+  max-height: calc(100vh - 350px);
   overflow: auto;
 }
