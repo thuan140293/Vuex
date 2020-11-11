@@ -35,20 +35,30 @@ export default {
 }
 </script>
 
-<template lang="pug">
-.main
-  h1 Posts
-  .titles
-    .title Subject
-    .title Edit
-    .title Delete
-  .post(v-for='post in posts.slice(0, 6)' :key='post.id')
-    a(:href='`/post/${post.id}`') {{post.title}}
-    .actions
-      .icon.edit-icon(@click='edit(post)')
-      .icon.delete-icon(@click='remove(post)')
-  alert(:post='selectedPost' @close='closeModal')
-  modal(:post='selectedPost' @close='closeModal')
+<template>
+  <div class="main">
+    <h1>Posts</h1>
+    <div class="titles">
+      <div class="titles">
+        Subject
+      </div>
+      <div class="titles">
+        Edit
+      </div>
+      <div class="titles">
+        Delete
+      </div>
+    </div>
+    <div class="post" v-for='post in posts.slice(0, 6)' :key='post.id'>
+      <a :href='`/post/${post.id}`'>{{post.title}}</a>
+      <div class="actions">
+        <div class="icon edit-icon" @click='edit(post)'></div>
+        <div class="icon delete-icon" @click='remove(post)'></div>
+      </div>
+    </div>
+    <alert :post='selectedPost' @close='closeModal'></alert>
+    <modal :post='selectedPost' @close='closeModal'></modal>
+  </div>
 </template>
 
 <style scoped>

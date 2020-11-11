@@ -10,17 +10,25 @@ export default {
 }
 </script>
 
-<template lang="pug">
-portal(to='removePost')
-  .modal-backdrop
-    .modal
-      header.modal-header Remove
-        button.btn-close(type='button' @click="$emit('close')") x
-      .modal-body {{ post.title }}
-        span  will be deleted.
-        p This action cannot be undone
-      .modal-footer
-        button.btn-delete(type='button' @click='deletePost(post.id)') Delete
+<template>
+  <portal to='removePost'>
+    <div class="modal-backdrop">
+      <div class="modal">
+        <header class="modal-header">
+          Remove
+          <button type="button" class="btn-close" @click="$emit('close')">x</button>  
+        </header>
+        <div class="modal-body">
+          <div>{{ post.title }}</div>
+          <span>will be deleted.</span>
+          <p>This action cannot be undone</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-delete" @click='deletePost(post.id)'>Delete</button>
+        </div>
+      </div>
+    </div>
+  </portal>
 </template>
 
 <style scoped>

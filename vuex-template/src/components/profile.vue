@@ -15,25 +15,30 @@ export default {
 }
 </script>
 
-<template lang="pug">
-.container
-  .main
-    .profile-detail
-      h1 {{profile.name}}
-      h2 {{profile.address.city}}
-    .field-detail
-      .fields
-        .label Username
-        .value {{profile.username}}
-        .label Email
-        .value {{profile.email}}
-        .label Phone
-        .value {{profile.phone}}
-        .label Website
-        .value {{profile.website}}
-        .label Company
-        .value {{profile.company.name}}
-      maps
+<template>
+  <div class="container">
+    <div class="main">
+      <div class="profile-detail">
+        <h1>{{profile.name}}</h1>
+        <h2>{{profile.address.city}}</h2>
+      </div>
+      <div class="field-detail">
+        <div class="fields">
+          <div class="label">Username</div>
+          <div class="value">{{profile.username}}</div>
+          <div class="label">Email</div>
+          <div class="value">{{profile.email}}</div>
+          <div class="label">Phone</div>
+          <div class="value">{{profile.phone}}</div>
+          <div class="label">Website</div>
+          <div class="value">{{profile.website}}</div>
+          <div class="label">Company</div>
+          <div class="value">{{profile.company.name}}</div>
+        </div>
+        <maps></maps>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>

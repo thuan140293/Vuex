@@ -18,8 +18,6 @@ body
         li
           a(href='') WORKS
         li
-          a(href='') POSTS
-        li
           a(href='') ABOUT US
         li
           a(href='') POSTS

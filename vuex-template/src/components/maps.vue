@@ -51,7 +51,9 @@ export default {
 </script>
 
 <template lang="pug">
-div
-  gmap-map(:center='center' :zoom='12' style='width:360px;  height: 153px;')
-    gmap-marker(:key='index' v-for='(m, index) in markers' :position='m.position' @click='center=m.position')
+  <div>
+    <gmap-map :center='center' :zoom='12' style='width:360px;  height: 153px;'>
+      <gmap-marker :key='index' v-for='(m, index) in markers' :position='m.position' @click='center=m.position'></gmap-marker>
+    </gmap-map>
+  </div>
 </template>

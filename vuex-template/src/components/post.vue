@@ -20,14 +20,17 @@ export default {
 }
 </script>
 
-<template lang="pug">
-.container
-  .main
-    h1 {{ selectedPost.title}}
-    .value {{ selectedPost.body}}
-    p(@click='goUser(selectedPost.user.id)')
-      | written by,&nbsp;
-      span.value {{selectedPost.user.name}}
+<template>
+  <div class="container">
+    <div class="main">
+      <h1>{{ selectedPost.title}}</h1>
+      <div class="value">{{ selectedPost.body}}</div>
+      <p @click='goUser(selectedPost.user.id)'>
+        <span>| written by,&nbsp;</span>
+        <span class="value">{{selectedPost.user.name}}</span>
+      </p>
+    </div>
+  </div>
 </template>
 
 <style scoped>

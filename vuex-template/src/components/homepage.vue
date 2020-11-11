@@ -11,7 +11,8 @@ export default {
 }
 </script>
 
-<template lang="pug">
-.container
-  posts
+<template>
+  <div class="container">
+    <posts></posts>
+  </div>
 </template>

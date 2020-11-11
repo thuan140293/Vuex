@@ -10,20 +10,27 @@ export default {
 }
 </script>
 
-<template lang="pug">
-portal(to='editPost')
-  .modal-backdrop
-    .modal
-      header.modal-header Edit
-        button.btn-close(type='button' @click="$emit('close')") x
-      .modal-body
-        input(type='hidden')
-        .label Title
-        input.form-control(type='text' v-model='post.title' placeholder='title')
-        .label Body
-        textarea.form-control(type='text' v-model='post.body' placeholder='body')
-      .modal-footer
-        button.btn-delete(type='button' @click='updatePost(post.id)') Update
+<template>
+  <portal to='editPost'>
+    <div class="modal-backdrop">
+      <div class="modal">
+        <header class="modal-header">
+          Edit
+          <button type="button" class="btn-close" @click="$emit('close')">x</button>  
+        </header>
+        <div class="modal-body">
+          <input type="hidden">
+          <div class="label">Title</div>
+          <input type="text" placeholder="title" v-model='post.title' class="form-control">
+          <div class="label">Body</div>
+          <textarea type="text" placeholder="body" v-model='post.body' class="form-control"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-delete" @click='updatePost(post.id)'>Update</button>
+        </div>
+      </div>
+    </div>
+  </portal>
 </template>
 
 <style scoped>
