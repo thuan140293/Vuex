@@ -1,11 +1,11 @@
 import Vue from 'vue';
 
 const getById = async (request) => {
-    return Vue.prototype.$http.get(`https://5efd8910dd373900160b321d.mockapi.io/listUser/${request}`);
+    return Vue.prototype.$http.get(`${process.env.VUE_APP_API_ROOT}/listUser/${request}`);
 }
 
 const createBlog = async (request) => {
-    return Vue.prototype.$http.post(`https://5efd8910dd373900160b321d.mockapi.io/listUser/${request.id}/blogs`, request.formData);
+    return Vue.prototype.$http.post(`${process.env.VUE_APP_API_ROOT}/listUser/${request.id}/blogs`, request.formData);
 }
 
 export default {
