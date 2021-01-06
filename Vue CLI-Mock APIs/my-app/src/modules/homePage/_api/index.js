@@ -1,14 +1,7 @@
 import Vue from 'vue';
 
 const getData = async (search, page, limit, sortBy, sortDirection) => {
-    let params = {
-        "search": search,
-        "page": page,
-        "limit": limit,
-        "sortBy": sortBy,
-        "order": sortDirection
-    }
-    return Vue.prototype.$http.get(`${process.env.VUE_APP_API_ROOT}/listUser?${params}`);
+    return Vue.prototype.$http.get(`${process.env.VUE_APP_API_ROOT}/listUser?search=${search}&page=${page}&limit=${limit}&sortBy=${sortBy}&order=${sortDirection}`);
 }
 
 const getDataNoPaging = async (search) => {
